@@ -2,8 +2,10 @@ import React from "react"
 import { Route, Routes } from "react-router-dom"
 import Navigation from "./components/Navigation"
 import Home from "./pages/home"
-import Archive from "./pages/Archive"
-import Detail from "./pages/Detail"
+import ArchiveNotes from "./pages/ArchiveNotes"
+import DetailNote from "./pages/DetailNote"
+import { getAllNotes } from "./utils/local-data"
+import AddNote from "./pages/AddNote"
 
 // class App extends React.Component {
 //     constructor(props) {
@@ -103,22 +105,67 @@ import Detail from "./pages/Detail"
 //     }
 // }
 
-function App() {
-    return (
-        <>
-            <header className="flex flex-row justify-around mt-8">
-                <h1 className="font-black ">Note App</h1>
-                <Navigation />
-            </header>
-            <main>
-                <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/archive" element={<Archive />} />
-                    <Route path="/detail/:id" element={<Detail />} />
-                </Routes>
-            </main>
-        </>
-    )
+class App extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            notes: getAllNotes(),
+        }
+
+        this.onSubmitEventHandler = this.onSubmitEventHandler.bind(this)
+        this.onDeleteHandler = this.onDeleteHandler.bind(this)
+        this.onArchiveHandler = this.onArchiveHandler.bind(this)
+    }
+
+    onSubmitEventHandler({ title, description }) {
+        if (title && description) {
+            const newNote = {
+                id: `${+new Date()}`,
+                title: title,
+                body: description,
+                createdAt: new Date().toISOString(),
+                archived: false,
+            }
+            this.setState((prevState) => ({
+                notes: [...prevState.notes, newNote],
+            }))
+        } else {
+            alert("Title and description are required.")
+        }
+    }
+
+    onDeleteHandler({ id }) {
+        const notes = this.state.notes.filter((note) => note.id !== id)
+        this.setState({ notes })
+    }
+
+    onArchiveHandler({ id }) {
+        this.setState((prevState) => ({
+            notes: prevState.notes.map((note) => (note.id === id ? { ...note, archived: !note.archived } : note)),
+        }))
+    }
+
+    render() {
+        return (
+            <>
+                <header className="flex flex-row justify-around mt-8">
+                    <h1 className="font-black ">Note App</h1>
+                    <Navigation />
+                </header>
+                <main>
+                    <Routes>
+                        <Route path="/" element={<Home notes={this.state.notes} />} />
+                        <Route path="/archive" element={<ArchiveNotes notes={this.state.notes} />} />
+                        <Route path="/add" element={<AddNote addNote={this.onSubmitEventHandler} />} />
+                        <Route
+                            path="/detail/:id"
+                            element={<DetailNote notes={this.state.notes} onArchive={this.onArchiveHandler} onDelete={this.onDeleteHandler} />}
+                        />
+                    </Routes>
+                </main>
+            </>
+        )
+    }
 }
 
 export default App

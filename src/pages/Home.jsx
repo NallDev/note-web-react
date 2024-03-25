@@ -1,10 +1,9 @@
 import React from "react"
 import { SearchBar } from "../components/search_bar"
 import { NoteList } from "../components/note_llist"
-import { getActiveNotes } from "../utils/local-data"
 import { useSearchParams } from "react-router-dom"
 
-function HomePageWrapper() {
+function HomePageWrapper({ notes }) {
     const [searchParams, setSearchParams] = useSearchParams()
     const query = searchParams.get("query") || ""
 
@@ -12,14 +11,13 @@ function HomePageWrapper() {
         setSearchParams({ query: newQuery })
     }
 
-    return <Home defaultQuery={query} onQueryChange={changeQueryParams} />
+    return <Home defaultQuery={query} onQueryChange={changeQueryParams} notes={notes} />
 }
 
 class Home extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            notes: getActiveNotes(),
             query: props.defaultQuery,
         }
     }
@@ -34,7 +32,7 @@ class Home extends React.Component {
         return (
             <div className="flex flex-col items-center justify-center p-8">
                 <SearchBar onQueryChange={this.onQueryChangeEventHandler} query={this.state.query} />
-                <NoteList notes={this.state.notes.filter((note) => note.title.toLowerCase().includes(this.state.query.toLowerCase()))} />
+                <NoteList notes={this.props.notes.filter((note) => note.title.toLowerCase().includes(this.state.query.toLowerCase()))} />
             </div>
         )
     }

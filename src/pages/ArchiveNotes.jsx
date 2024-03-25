@@ -12,14 +12,13 @@ function ArchivePageWrapper() {
         setSearchParams({ query: newQuery })
     }
 
-    return <Archive defaultQuery={query} onQueryChange={changeQueryParams} />
+    return <ArchiveNotes defaultQuery={query} onQueryChange={changeQueryParams} />
 }
 
-class Archive extends React.Component {
+class ArchiveNotes extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            notes: getArchivedNotes(),
             query: props.defaultQuery,
         }
     }
@@ -34,7 +33,7 @@ class Archive extends React.Component {
         return (
             <div className="flex flex-col items-center justify-center p-8">
                 <SearchBar onQueryChange={this.onQueryChangeEventHandler} query={this.state.query} />
-                <NoteList notes={this.state.notes.filter((note) => note.title.toLocaleLowerCase().includes(this.state.query.toLowerCase()))} />
+                <NoteList notes={this.props.notes.filter((note) => note.title.toLocaleLowerCase().includes(this.state.query.toLowerCase()))} />
             </div>
         )
     }
