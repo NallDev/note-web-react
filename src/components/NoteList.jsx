@@ -1,9 +1,11 @@
 import React from "react"
-import { NoteCard } from "./note_card"
+import NoteCard from "./NoteCard"
+import Empty from "./Empty"
+import PropTypes from "prop-types"
 
-export const NoteList = ({ notes, onDelete, onArchive }) => {
+function NoteList({ notes, onDelete, onArchive }) {
     if (!notes || notes.length === 0) {
-        return <p className="text-gray-700 mt-8">Empty</p>
+        return <Empty />
     }
 
     return (
@@ -23,3 +25,19 @@ export const NoteList = ({ notes, onDelete, onArchive }) => {
         </div>
     )
 }
+
+NoteList.propTypes = {
+    notes: PropTypes.arrayOf(
+        PropTypes.shape({
+            id: PropTypes.string.isRequired,
+            title: PropTypes.string.isRequired,
+            createdAt: PropTypes.string.isRequired,
+            body: PropTypes.string.isRequired,
+            archived: PropTypes.bool.isRequired,
+        }),
+    ).isRequired,
+    onDelete: PropTypes.func,
+    onArchive: PropTypes.func,
+}
+
+export default NoteList

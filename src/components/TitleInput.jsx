@@ -1,6 +1,7 @@
 import React from "react"
+import PropTypes from "prop-types"
 
-export const TitleInput = ({ onChange, value, maxLength }) => {
+function TitleInput({ onChange, value, maxLength }) {
     const remaining = maxLength - value.length
     const counterColor = remaining === 0 ? "text-red-500" : "text-black"
 
@@ -19,3 +20,11 @@ export const TitleInput = ({ onChange, value, maxLength }) => {
         </div>
     )
 }
+
+TitleInput.propTypes = {
+    onChange: PropTypes.func.isRequired,
+    value: PropTypes.string.isRequired,
+    maxLength: PropTypes.number.isRequired,
+}
+
+export default TitleInput

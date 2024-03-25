@@ -1,10 +1,10 @@
 import React from "react"
-import { SearchBar } from "../components/search_bar"
-import { NoteList } from "../components/note_llist"
+import SearchBar from "../components/SearchBar"
+import NoteList from "../components/NoteList"
 import { useSearchParams } from "react-router-dom"
-import { getArchivedNotes } from "../utils/local-data"
+import PropTypes from "prop-types"
 
-function ArchivePageWrapper() {
+function ArchivePageWrapper({ notes }) {
     const [searchParams, setSearchParams] = useSearchParams()
     const query = searchParams.get("query") || ""
 
@@ -12,7 +12,13 @@ function ArchivePageWrapper() {
         setSearchParams({ query: newQuery })
     }
 
-    return <ArchiveNotes defaultQuery={query} onQueryChange={changeQueryParams} />
+    return (
+        <ArchiveNotes
+            defaultQuery={query}
+            onQueryChange={changeQueryParams}
+            notes={notes.filter((note) => note.title.toLowerCase().includes(query.toLowerCase()) && note.archived)}
+        />
+    )
 }
 
 class ArchiveNotes extends React.Component {
@@ -33,10 +39,23 @@ class ArchiveNotes extends React.Component {
         return (
             <div className="flex flex-col items-center justify-center p-8">
                 <SearchBar onQueryChange={this.onQueryChangeEventHandler} query={this.state.query} />
-                <NoteList notes={this.props.notes.filter((note) => note.title.toLocaleLowerCase().includes(this.state.query.toLowerCase()))} />
+                <NoteList notes={this.props.notes} />
             </div>
         )
     }
+}
+
+ArchiveNotes.propTypes = {
+    defaultQuery: PropTypes.string,
+    onQueryChange: PropTypes.func.isRequired,
+    notes: PropTypes.arrayOf(
+        PropTypes.shape({
+            id: PropTypes.string.isRequired,
+            title: PropTypes.string.isRequired,
+            body: PropTypes.string.isRequired,
+            archived: PropTypes.bool.isRequired,
+        }),
+    ).isRequired,
 }
 
 export default ArchivePageWrapper

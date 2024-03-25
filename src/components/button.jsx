@@ -1,6 +1,7 @@
 import React from "react"
+import PropTypes from "prop-types"
 
-export const Button = ({ children, variant, ...props }) => {
+function Button({ children, variant, ...props }) {
     let className = "font-bold py-2 px-4 rounded flex-1 focus:outline-none focus:ring-2 focus:ring-offset-2 "
 
     switch (variant) {
@@ -23,3 +24,10 @@ export const Button = ({ children, variant, ...props }) => {
         </button>
     )
 }
+
+Button.propTypes = {
+    children: PropTypes.node.isRequired,
+    variant: PropTypes.oneOf(["submit", "delete", "archive"]).isRequired,
+}
+
+export default Button

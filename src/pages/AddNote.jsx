@@ -1,9 +1,10 @@
 import React from "react"
-import { NoteForm } from "../components/note_form"
+import NoteForm from "../components/NoteForm"
 import { useNavigate } from "react-router-dom"
+import PropTypes from "prop-types"
 
 function AddNoteWrapper(props) {
-    let navigate = useNavigate()
+    const navigate = useNavigate()
 
     const handleAddNote = (note) => {
         props.addNote(note)
@@ -40,12 +41,12 @@ class AddNote extends React.Component {
     render() {
         return (
             <>
+                <h1 className="text-2xl font-black p-8 text-black text-center">Add Note</h1>
                 <NoteForm
                     onTitleChange={this.onTitleChangeEventHandler}
                     onDescriptionChange={this.onDescriptionChangeEventHandler}
                     onSubmit={(event) => {
                         event.preventDefault()
-                        console.log("THIS IS RUN")
                         this.props.addNote({
                             title: this.state.title,
                             description: this.state.description,
@@ -57,6 +58,10 @@ class AddNote extends React.Component {
             </>
         )
     }
+}
+
+AddNote.propTypes = {
+    addNote: PropTypes.func.isRequired,
 }
 
 export default AddNoteWrapper

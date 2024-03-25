@@ -1,27 +1,27 @@
 import React from "react"
 import { showFormattedDate } from "../utils"
 import { useParams, useNavigate } from "react-router-dom"
-import { Button } from "../components/button"
+import Button from "../components/Button"
+import Empty from "../components/Empty"
+import PropTypes from "prop-types"
 
-function DetailPageWrapper({ notes, onArchive, onDelete }) {
-    const navigate = useNavigate() // useNavigate hook for redirection
+function Detail({ notes, onArchive, onDelete }) {
+    const navigate = useNavigate()
     const { id } = useParams()
     const note = notes.find((note) => note.id === id)
 
     const handleArchiveClick = () => {
         onArchive({ id })
-        navigate("/") // Redirect to home after archiving
+        navigate("/")
     }
 
     const handleDeleteClick = () => {
         onDelete({ id })
-        navigate("/") // Redirect to home after deletion
+        navigate("/")
     }
 
-    // Ensure `note` is not undefined before trying to render its properties
     if (!note) {
-        // Optionally, navigate to a 'not found' page or show a message
-        return <div>Note not found</div>
+        return <Empty />
     }
 
     return (
@@ -43,4 +43,18 @@ function DetailPageWrapper({ notes, onArchive, onDelete }) {
     )
 }
 
-export default DetailPageWrapper
+Detail.propTypes = {
+    notes: PropTypes.arrayOf(
+        PropTypes.shape({
+            id: PropTypes.string.isRequired,
+            title: PropTypes.string.isRequired,
+            body: PropTypes.string.isRequired,
+            createdAt: PropTypes.string.isRequired,
+            archived: PropTypes.bool.isRequired,
+        }),
+    ).isRequired,
+    onArchive: PropTypes.func.isRequired,
+    onDelete: PropTypes.func.isRequired,
+}
+
+export default Detail
