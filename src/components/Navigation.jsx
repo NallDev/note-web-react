@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 function Navigation() {
     return (
         <nav>
-            <ul>
+            <ul className="flex flex-row space-x-8">
                 <li>
                     <Link to="/">
                         <img src="/images/home.svg" alt="home" />

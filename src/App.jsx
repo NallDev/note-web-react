@@ -1,8 +1,9 @@
 import React from "react"
-import { NoteForm } from "./components/note_form"
-import { SearchBar } from "./components/search_bar"
-import { NoteList } from "./components/note_llist"
+import { Route, Routes } from "react-router-dom"
 import Navigation from "./components/Navigation"
+import Home from "./pages/home"
+import Archive from "./pages/Archive"
+import Detail from "./pages/Detail"
 
 // class App extends React.Component {
 //     constructor(props) {
@@ -105,10 +106,17 @@ import Navigation from "./components/Navigation"
 function App() {
     return (
         <>
-            <header>
-                <h1>Note App</h1>
+            <header className="flex flex-row justify-around mt-8">
+                <h1 className="font-black ">Note App</h1>
                 <Navigation />
             </header>
+            <main>
+                <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/archive" element={<Archive />} />
+                    <Route path="/detail/:id" element={<Detail />} />
+                </Routes>
+            </main>
         </>
     )
 }
