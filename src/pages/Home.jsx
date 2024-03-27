@@ -1,5 +1,5 @@
 import React from "react"
-import SearchBar from "../components/SearchBar"
+import InputText from "../components/InputText"
 import NoteList from "../components/NoteList"
 import { useSearchParams } from "react-router-dom"
 import PropTypes from "prop-types"
@@ -50,7 +50,7 @@ class Home extends React.Component {
     render() {
         return (
             <div className="flex flex-col items-center justify-center p-8">
-                <SearchBar onQueryChange={this.onQueryChangeEventHandler} query={this.state.query} />
+                <InputText onQueryChange={this.onQueryChangeEventHandler} query={this.state.query} placeholder="Search..." />
                 <NoteList notes={this.props.notes} />
             </div>
         )

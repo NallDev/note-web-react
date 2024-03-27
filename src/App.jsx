@@ -7,6 +7,8 @@ import DetailNote from "./pages/DetailNote"
 import { getAllNotes } from "./utils/local-data"
 import AddNote from "./pages/AddNote"
 import NotFound from "./pages/Notfound"
+import Login from "./pages/Login"
+import Register from "./pages/Register"
 
 class App extends React.Component {
     constructor(props) {
@@ -57,7 +59,9 @@ class App extends React.Component {
                 </header>
                 <main>
                     <Routes>
-                        <Route path="/" element={<Home notes={this.state.notes} />} />
+                        {/* <Route path="/" element={<Home notes={this.state.notes} />} /> */}
+                        <Route path="/" element={<Login />} />
+                        <Route path="/register" element={<Register />} />
                         <Route path="/archive" element={<ArchiveNotes notes={this.state.notes} />} />
                         <Route path="/add" element={<AddNote addNote={this.onSubmitEventHandler} />} />
                         <Route
