@@ -1,25 +1,47 @@
 import React from "react"
 import { Link } from "react-router-dom"
+import UseAuth from "../hooks/UseAuth"
 
 function Navigation() {
+    const [authedUser, setAuthedUser] = UseAuth()
+
     return (
         <nav>
             <ul className="flex flex-row space-x-8">
                 <li>
-                    <Link to="/">
-                        <img src="/images/home.svg" alt="home" />
-                    </Link>
+                    <a href="#">
+                        <img src="/images/translate.svg" alt="translate" />
+                    </a>
                 </li>
                 <li>
-                    <Link to="/archive">
-                        <img src="/images/archive.svg" alt="archive" />
-                    </Link>
+                    <a href="#">
+                        <img src="/images/dark.svg" alt="theme-mode" />
+                    </a>
                 </li>
-                <li>
-                    <Link to="/add">
-                        <img src="/images/add.svg" alt="add" />
-                    </Link>
-                </li>
+                {authedUser && (
+                    <>
+                        <li>
+                            <Link to="/">
+                                <img src="/images/home.svg" alt="home" />
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to="/archive">
+                                <img src="/images/archive.svg" alt="archive" />
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to="/add">
+                                <img src="/images/add.svg" alt="add" />
+                            </Link>
+                        </li>
+                        <li>
+                            <a href="#" onClick={() => setAuthedUser(null)}>
+                                <img src="/images/logout.svg" alt="logout" />
+                            </a>
+                        </li>
+                    </>
+                )}
             </ul>
         </nav>
     )

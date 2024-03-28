@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import InputText from "../components/InputText"
-import useInput from "../utils/UseInput"
+import useInput from "../hooks/UseInput"
 import Button from "../components/Button"
 import { Link, useNavigate } from "react-router-dom"
 import Loading from "../components/Loading"
@@ -22,8 +22,8 @@ function Register() {
 
         setIsSubmitting(true)
         try {
-            const result = await register({ name, email, password })
-            if (!result.error) {
+            const { error } = await register({ name, email, password })
+            if (!error) {
                 alert("Registration successful!")
                 navigate("/")
             }
