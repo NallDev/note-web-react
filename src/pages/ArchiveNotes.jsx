@@ -1,61 +1,57 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import InputText from "../components/InputText"
 import NoteList from "../components/NoteList"
 import { useSearchParams } from "react-router-dom"
 import PropTypes from "prop-types"
+import Loading from "../components/Loading"
+import { getArchivedNotes } from "../utils/api"
 
-function ArchivePageWrapper({ notes }) {
+function ArchiveNotes() {
     const [searchParams, setSearchParams] = useSearchParams()
-    const query = searchParams.get("query") || ""
+    const [query, setQuery] = useState(searchParams.get("query") || "")
+    const [notes, setNotes] = useState([])
+    const [isLoading, setIsLoading] = useState(false)
+
+    useEffect(() => {
+        const fetchData = async () => {
+            setIsLoading(true)
+            try {
+                const { error, data } = await getArchivedNotes()
+                if (!error) {
+                    setNotes(data)
+                }
+            } catch (error) {
+                alert("An expected error when fetching data")
+            } finally {
+                setIsLoading(false)
+            }
+        }
+
+        fetchData()
+    }, [])
+
+    const handleQueryChange = (event) => {
+        const newQuery = event.target.value
+        setQuery(newQuery)
+        changeQueryParams(newQuery)
+    }
 
     function changeQueryParams(newQuery) {
         setSearchParams({ query: newQuery })
     }
 
+    const filteredNotes = notes.filter((note) => note.title.toLowerCase().includes(query.toLowerCase()))
+
     return (
-        <ArchiveNotes
-            defaultQuery={query}
-            onQueryChange={changeQueryParams}
-            notes={notes.filter((note) => note.title.toLowerCase().includes(query.toLowerCase()) && note.archived)}
-        />
+        <>
+        <Loading isLoading={isLoading}/>
+        <div className="flex flex-col items-center justify-center p-8">
+            <InputText onQueryChange={handleQueryChange} query={query} placeholder="Search..." />
+            <NoteList notes={filteredNotes} />
+        </div>
+        </>
+        
     )
 }
 
-class ArchiveNotes extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            query: props.defaultQuery,
-        }
-    }
-
-    onQueryChangeEventHandler = (event) => {
-        const newQuery = event.target.value
-        this.setState({ query: newQuery })
-        this.props.onQueryChange(newQuery)
-    }
-
-    render() {
-        return (
-            <div className="flex flex-col items-center justify-center p-8">
-                <InputText onQueryChange={this.onQueryChangeEventHandler} query={this.state.query} placeholder="Search..." />
-                <NoteList notes={this.props.notes} />
-            </div>
-        )
-    }
-}
-
-ArchiveNotes.propTypes = {
-    defaultQuery: PropTypes.string,
-    onQueryChange: PropTypes.func.isRequired,
-    notes: PropTypes.arrayOf(
-        PropTypes.shape({
-            id: PropTypes.string.isRequired,
-            title: PropTypes.string.isRequired,
-            body: PropTypes.string.isRequired,
-            archived: PropTypes.bool.isRequired,
-        }),
-    ).isRequired,
-}
-
-export default ArchivePageWrapper
+export default ArchiveNotes

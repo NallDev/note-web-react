@@ -9,7 +9,9 @@ import AddNote from "./pages/AddNote"
 import NotFound from "./pages/Notfound"
 import Login from "./pages/Login"
 import Register from "./pages/Register"
-import UseAuth from "./hooks/UseAuth"
+import UseLocalStorage from "./hooks/UseLocalStorage"
+import { TokenKey } from "./utils/constant"
+import { getAccessToken } from "./utils/api"
 
 // class App extends React.Component {
 //     constructor(props) {
@@ -78,9 +80,8 @@ import UseAuth from "./hooks/UseAuth"
 // }
 
 function App() {
-    const [authedUser, setAuthedUser] = UseAuth()
-
-    if (!authedUser) {
+    console.log(getAccessToken())
+    if (getAccessToken() === "" || getAccessToken() == null) {
         return (
             <div className="app-container">
                 <header className="flex flex-row justify-around mt-8">
@@ -105,10 +106,10 @@ function App() {
             </header>
             <main>
                 <Routes>
-                    <Route path="/" element={<Home notes={notes} />} />
-                    <Route path="/archive" element={<ArchiveNotes notes={notes} />} />
-                    <Route path="/add" element={<AddNote addNote={onSubmitEventHandler} />} />
-                    <Route path="/detail/:id" element={<DetailNote notes={notes} onArchive={onArchiveHandler} onDelete={onDeleteHandler} />} />
+                    <Route path="/" element={<Home />} />
+                    <Route path="/archive" element={<ArchiveNotes />} />
+                    <Route path="/add" element={<AddNote />} />
+                    <Route path="/detail/:id" element={<DetailNote />} />
                     <Route path="*" element={<NotFound />} />
                 </Routes>
             </main>

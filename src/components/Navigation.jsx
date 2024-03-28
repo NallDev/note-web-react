@@ -1,24 +1,18 @@
 import React from "react"
 import { Link } from "react-router-dom"
-import UseAuth from "../hooks/UseAuth"
+import { getAccessToken } from "../utils/api"
 
 function Navigation() {
-    const [authedUser, setAuthedUser] = UseAuth()
-
     return (
         <nav>
             <ul className="flex flex-row space-x-8">
                 <li>
-                    <a href="#">
-                        <img src="/images/translate.svg" alt="translate" />
-                    </a>
+                    <img src="/images/translate.svg" alt="translate" style={{ cursor: "pointer" }} />
                 </li>
                 <li>
-                    <a href="#">
-                        <img src="/images/dark.svg" alt="theme-mode" />
-                    </a>
+                    <img src="/images/dark.svg" alt="theme-mode" style={{ cursor: "pointer" }} />
                 </li>
-                {authedUser && (
+                {getAccessToken() && (
                     <>
                         <li>
                             <Link to="/">
