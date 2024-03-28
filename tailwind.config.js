@@ -3,10 +3,10 @@ export default {
     content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
     theme: {
         extend: {
-            filter: ['dark'],
-      invert: ['dark'],
+            filter: ["dark"],
+            invert: ["dark"],
         },
     },
-    darkMode: 'selector',
+    darkMode: "selector",
     plugins: [],
 }

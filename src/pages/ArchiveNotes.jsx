@@ -2,15 +2,17 @@ import React, { useState, useEffect } from "react"
 import InputText from "../components/InputText"
 import NoteList from "../components/NoteList"
 import { useSearchParams } from "react-router-dom"
-import PropTypes from "prop-types"
 import Loading from "../components/Loading"
 import { getArchivedNotes } from "../utils/api"
+import { useAppContext } from "../context/AppContext"
+import { EnSearch, IdSearch } from "../utils/constant"
 
 function ArchiveNotes() {
     const [searchParams, setSearchParams] = useSearchParams()
     const [query, setQuery] = useState(searchParams.get("query") || "")
     const [notes, setNotes] = useState([])
     const [isLoading, setIsLoading] = useState(false)
+    const { language } = useAppContext()
 
     useEffect(() => {
         const fetchData = async () => {
@@ -44,13 +46,12 @@ function ArchiveNotes() {
 
     return (
         <>
-        <Loading isLoading={isLoading}/>
-        <div className="flex flex-col items-center justify-center p-8">
-            <InputText onQueryChange={handleQueryChange} query={query} placeholder="Search..." />
-            <NoteList notes={filteredNotes} />
-        </div>
+            <Loading isLoading={isLoading} />
+            <div className="flex flex-col items-center justify-center p-8">
+                <InputText onQueryChange={handleQueryChange} query={query} placeholder={language === "en" ? EnSearch : IdSearch} />
+                <NoteList notes={filteredNotes} />
+            </div>
         </>
-        
     )
 }
 

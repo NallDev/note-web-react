@@ -4,12 +4,15 @@ import NoteList from "../components/NoteList"
 import { useSearchParams } from "react-router-dom"
 import Loading from "../components/Loading"
 import { getActiveNotes } from "../utils/api"
+import { useAppContext } from "../context/AppContext"
+import { EnSearch, IdSearch } from "../utils/constant"
 
 function Home() {
     const [searchParams, setSearchParams] = useSearchParams()
     const [query, setQuery] = useState(searchParams.get("query") || "")
     const [notes, setNotes] = useState([])
     const [isLoading, setIsLoading] = useState(false)
+    const { language } = useAppContext()
 
     useEffect(() => {
         const fetchData = async () => {
@@ -44,8 +47,8 @@ function Home() {
     return (
         <>
             <Loading isLoading={isLoading} />
-            <div className="flex flex-col items-center justify-center p-8">
-                <InputText onQueryChange={handleQueryChange} query={query} placeholder="Search..." />
+            <div className="flex flex-col items-center justify-center p-8 bg-gray-100 dark:bg-gray-900">
+                <InputText onQueryChange={handleQueryChange} query={query} placeholder={language === "en" ? EnSearch : IdSearch} />
                 <NoteList notes={filteredNotes} />
             </div>
         </>

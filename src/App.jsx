@@ -8,22 +8,21 @@ import AddNote from "./pages/AddNote"
 import NotFound from "./pages/Notfound"
 import Login from "./pages/Login"
 import Register from "./pages/Register"
-import { useAuth } from "./context/AuthContext"
-import { useTheme } from "./context/ThemeContext"
+import { useAppContext } from "./context/AppContext"
+import { EnNoteApp, IdNoteApp } from "./utils/constant"
 
 function App() {
-    const {token} = useAuth();
-    const { theme } = useTheme();
+    const { token, theme, language } = useAppContext()
 
     useEffect(() => {
-        document.documentElement.classList.toggle('dark', theme === 'dark');
-    }, [theme]);
+        document.documentElement.classList.toggle("dark", theme === "dark")
+    }, [theme])
 
     if (!token) {
         return (
             <div className="app-container bg-gray-100 dark:bg-gray-900">
                 <header className="flex flex-row justify-around pt-8">
-                    <h1 className="font-black text-gray-900 dark:text-white">Note App</h1>
+                    <h1 className="font-black text-gray-900 dark:text-white">{language === "en" ? EnNoteApp : IdNoteApp}</h1>
                     <Navigation />
                 </header>
                 <main>
@@ -33,13 +32,13 @@ function App() {
                     </Routes>
                 </main>
             </div>
-        );
+        )
     }
 
     return (
         <div className="bg-gray-100 dark:bg-gray-900 h-screen">
             <header className="flex flex-row justify-around pt-8">
-                <h1 className="font-black text-gray-900 dark:text-white">Note App</h1>
+                <h1 className="font-black text-gray-900 dark:text-white">{language === "en" ? EnNoteApp : IdNoteApp}</h1>
                 <Navigation />
             </header>
             <main>
