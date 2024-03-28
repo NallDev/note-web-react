@@ -5,16 +5,16 @@ import PropTypes from "prop-types"
 
 function NoteCard({ id, title, date, description }) {
     return (
-        <Link to={`/detail/${id}`}>
-            <div className="border border-gray-300 rounded-md p-4 flex flex-col h-full hover:bg-slate-200">
+        <Link to={`/detail/${id}`} className="block">
+            <div className="border border-gray-300 dark:border-gray-600 rounded-md p-4 flex flex-col h-full hover:bg-slate-200 dark:hover:bg-gray-600">
                 <div className="flex-grow">
-                    <h3 className="text-lg font-bold mb-2 text-black break-words">{title}</h3>
-                    <p className="text-base mb-2 text-gray-500 break-words">{showFormattedDate(date)}</p>
-                    <p className="text-base mb-2 text-gray-700 break-words">{description}</p>
+                    <h3 className="text-lg font-bold mb-2 text-black dark:text-white break-words">{title}</h3>
+                    <p className="text-base mb-2 text-gray-500 dark:text-gray-400 break-words">{showFormattedDate(date)}</p>
+                    <p className="text-base mb-2 text-gray-700 dark:text-gray-300 break-words">{description}</p>
                 </div>
             </div>
         </Link>
-    )
+    );
 }
 
 NoteCard.propTypes = {

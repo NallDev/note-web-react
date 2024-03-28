@@ -74,11 +74,11 @@ setIsLoading(false)
     return (
         <>
         <Loading isLoading={isLoading}/>    
-        <div className="border border-gray-300 rounded-md p-4 flex flex-col h-full m-8 max-md:">
+        <div className="border border-gray-300 dark:border-gray-600 rounded-md p-4 flex flex-col h-full m-8 max-md: dark:bg-gray-800">
             <div className="flex-grow">
-                <h3 className="text-lg font-bold mb-2 text-black break-words">{note.title}</h3>
-                <p className="text-base mb-2 text-gray-500 break-words">{showFormattedDate(note.createdAt)}</p>
-                <p className="text-base mb-2 text-gray-700 break-words">{note.body}</p>
+                <h3 className="text-lg font-bold mb-2 text-black dark:text-white break-words">{note.title}</h3>
+                <p className="text-base mb-2 text-gray-500 dark:text-gray-400 break-words">{showFormattedDate(note.createdAt)}</p>
+                <p className="text-base mb-2 text-gray-700 dark:text-gray-300 break-words">{note.body}</p>
             </div>
             <div className="flex gap-2 mt-2">
                 <Button variant="delete" onClick={handleDeleteClick}>
@@ -90,7 +90,7 @@ setIsLoading(false)
             </div>
         </div>
         </>
-    )
+    )    
 }
 
 export default Detail

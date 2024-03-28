@@ -38,8 +38,8 @@ function Register() {
         <>
             <Loading isLoading={isSubmitting} />
             <div className="flex flex-col items-center justify-center h-screen">
-                <div className="bg-white p-6 rounded-lg shadow-lg" style={{ maxWidth: "100%", width: "400px", borderRadius: "12px" }}>
-                    <h1 className="text-xl font-bold mb-4 text-center">Register</h1>
+                <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg" style={{ maxWidth: "100%", width: "400px", borderRadius: "12px" }}>
+                    <h1 className="text-xl font-bold mb-4 text-center dark:text-white">Register</h1>
                     <InputText onQueryChange={onNameChange} query={name} placeholder="Name" />
                     <div className="mt-2" />
                     <InputText onQueryChange={onEmailChange} query={email} placeholder="Email" type="email" />
@@ -48,10 +48,10 @@ function Register() {
                     <div className="mt-2" />
                     <InputText onQueryChange={onConfirmPasswordChange} query={confirmPassword} placeholder="Confirm Password" type="password" />
                     <Button children="Register" variant="submit" onClick={handleRegisterClick} />
-                    <p className="mt-4 text-center">
+                    <p className="mt-4 text-center dark:text-gray-300">
                         Don't have an account?
                         <Link to="/">
-                            <span className="text-blue-600 cursor-pointer"> Login</span>
+                            <span className="text-blue-600 dark:text-blue-400 cursor-pointer"> Login</span>
                         </Link>
                     </p>
                 </div>

@@ -37,7 +37,7 @@ function AddNote() {
     return (
         <>
         <Loading isLoading={isLoading} />
-            <h1 className="text-2xl font-black p-8 text-black text-center">Add Note</h1>
+            <h1 className="text-2xl font-black p-8 text-black dark:text-white text-center">Add Note</h1>
             <NoteForm
                 onTitleChange={onTitleChange}
                 onDescriptionChange={onBodyChange}
