@@ -4,7 +4,7 @@ import { EnEmpty, IdEmpty } from "../utils/constant"
 
 function Empty() {
     const { language } = useAppContext()
-    return <p className="text-gray-700 dark:text-white mt-8 text-center">{language === "en" ? EnEmpty : IdEmpty}</p>
+    return <p className="mt-8 text-center text-gray-700 dark:text-white">{language === "en" ? EnEmpty : IdEmpty}</p>
 }
 
 export default Empty

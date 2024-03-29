@@ -50,7 +50,7 @@ function Home() {
 
     return (
         <>
-            <div className="flex flex-col items-center justify-center p-8 bg-gray-100 dark:bg-gray-900">
+            <div className="flex flex-col items-center justify-center bg-gray-100 p-8 dark:bg-gray-900">
                 <InputText onQueryChange={handleQueryChange} query={query} placeholder={language === "en" ? EnSearch : IdSearch} />
                 <NoteList notes={filteredNotes} />
             </div>

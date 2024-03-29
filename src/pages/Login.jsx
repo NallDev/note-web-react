@@ -32,11 +32,11 @@ function Login() {
     return (
         <>
             <Loading isLoading={isSubmitting} />
-            <div className="flex flex-col items-center justify-center h-screen">
+            <div className="flex h-screen flex-col items-center justify-center">
                 <div
-                    className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg"
+                    className="rounded-lg bg-white p-6 shadow-lg dark:bg-gray-800"
                     style={{ maxWidth: "100%", width: "400px", borderRadius: "12px" }}>
-                    <h1 className="text-xl font-bold mb-4 text-center dark:text-white">{language === "en" ? EnLogin : IdLogin}</h1>
+                    <h1 className="mb-4 text-center text-xl font-bold dark:text-white">{language === "en" ? EnLogin : IdLogin}</h1>
                     <InputText onQueryChange={onEmailChange} query={email} placeholder="Email" type="email" />
                     <div className="mt-2" />
                     <InputText
@@ -49,7 +49,7 @@ function Login() {
                     <p className="mt-4 text-center dark:text-gray-300">
                         {language === "en" ? EnDontHaveAccount : IdDontHaveAccount}
                         <Link to="/register">
-                            <span className="text-blue-600 dark:text-blue-400 cursor-pointer"> {language === "en" ? EnRegister : IdRegister}</span>
+                            <span className="cursor-pointer text-blue-600 dark:text-blue-400"> {language === "en" ? EnRegister : IdRegister}</span>
                         </Link>
                     </p>
                 </div>

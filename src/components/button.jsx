@@ -20,7 +20,7 @@ function Button({ children, variant, ...props }) {
     }
 
     return (
-        <button className={className + (variant === "submit" ? "w-full max-w-md mt-4" : "")} {...props}>
+        <button className={className + (variant === "submit" ? "mt-4 w-full max-w-md" : "")} {...props}>
             {children}
         </button>
     )

@@ -78,13 +78,13 @@ function Detail() {
 
     return (
         <>
-            <div className="border border-gray-300 dark:border-gray-600 rounded-md p-4 flex flex-col h-full m-8 max-md: dark:bg-gray-800">
+            <div className="max-md: m-8 flex h-full flex-col rounded-md border border-gray-300 p-4 dark:border-gray-600 dark:bg-gray-800">
                 <div className="flex-grow">
-                    <h3 className="text-lg font-bold mb-2 text-black dark:text-white break-words">{note.title}</h3>
-                    <p className="text-base mb-2 text-gray-500 dark:text-gray-400 break-words">{showFormattedDate(note.createdAt, language)}</p>
-                    <p className="text-base mb-2 text-gray-700 dark:text-gray-300 break-words">{note.body}</p>
+                    <h3 className="mb-2 break-words text-lg font-bold text-black dark:text-white">{note.title}</h3>
+                    <p className="mb-2 break-words text-base text-gray-500 dark:text-gray-400">{showFormattedDate(note.createdAt, language)}</p>
+                    <p className="mb-2 break-words text-base text-gray-700 dark:text-gray-300">{note.body}</p>
                 </div>
-                <div className="flex gap-2 mt-2">
+                <div className="mt-2 flex gap-2">
                     <Button variant="delete" onClick={handleDeleteClick}>
                         {language === "en" ? EnDelete : IdDelete}
                     </Button>

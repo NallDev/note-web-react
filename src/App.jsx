@@ -36,7 +36,7 @@ function App() {
     }
 
     return (
-        <div className="bg-gray-100 dark:bg-gray-900 h-screen">
+        <div className="h-screen bg-gray-100 dark:bg-gray-900">
             <header className="flex flex-row justify-around pt-8">
                 <h1 className="font-black text-gray-900 dark:text-white">{language === "en" ? EnNoteApp : IdNoteApp}</h1>
                 <Navigation />

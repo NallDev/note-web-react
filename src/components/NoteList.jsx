@@ -9,7 +9,7 @@ function NoteList({ notes }) {
     }
 
     return (
-        <div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mt-8">
+        <div className="mt-8 grid w-full grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-4">
             {notes.map((note) => (
                 <NoteCard key={note.id} id={note.id} title={note.title} date={note.createdAt} description={note.body} />
             ))}

@@ -13,13 +13,13 @@ function Navigation() {
         <nav>
             <ul className="flex flex-row space-x-8">
                 <li>
-                    <img src="/images/translate.svg" alt="translate" className="cursor-pointer dark:filter dark:invert" onClick={toggleLanguage} />
+                    <img src="/images/translate.svg" alt="translate" className="cursor-pointer dark:invert dark:filter" onClick={toggleLanguage} />
                 </li>
                 <li>
                     <img
                         src={theme === "dark" ? "/images/light.svg" : "/images/dark.svg"}
                         alt="theme-mode"
-                        className="cursor-pointer dark:filter dark:invert"
+                        className="cursor-pointer dark:invert dark:filter"
                         onClick={toggleTheme}
                     />
                 </li>
@@ -27,21 +27,21 @@ function Navigation() {
                     <>
                         <li>
                             <Link to="/">
-                                <img src="/images/home.svg" alt="home" className="dark:filter dark:invert" />
+                                <img src="/images/home.svg" alt="home" className="dark:invert dark:filter" />
                             </Link>
                         </li>
                         <li>
                             <Link to="/archive">
-                                <img src="/images/archive.svg" alt="archive" className="dark:filter dark:invert" />
+                                <img src="/images/archive.svg" alt="archive" className="dark:invert dark:filter" />
                             </Link>
                         </li>
                         <li>
                             <Link to="/add">
-                                <img src="/images/add.svg" alt="add" className="dark:filter dark:invert" />
+                                <img src="/images/add.svg" alt="add" className="dark:invert dark:filter" />
                             </Link>
                         </li>
                         <li>
-                            <img src="/images/logout.svg" alt="logout" className="cursor-pointer dark:filter dark:invert" onClick={onLogout} />
+                            <img src="/images/logout.svg" alt="logout" className="cursor-pointer dark:invert dark:filter" onClick={onLogout} />
                         </li>
                     </>
                 )}

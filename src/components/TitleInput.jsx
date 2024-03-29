@@ -13,7 +13,7 @@ function TitleInput({ onChange, value, maxLength }) {
             <input
                 type="text"
                 placeholder={language === "en" ? EnTitle : IdTitle}
-                className="w-full p-1 border border-gray-300 dark:border-gray-600 rounded-md text-sm pr-16 dark:bg-gray-700 dark:text-gray-300"
+                className="w-full rounded-md border border-gray-300 p-1 pr-16 text-sm dark:border-gray-600 dark:bg-gray-700 dark:text-gray-300"
                 value={value}
                 onChange={onChange}
                 maxLength={maxLength}

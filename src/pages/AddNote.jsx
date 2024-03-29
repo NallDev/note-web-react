@@ -39,7 +39,7 @@ function AddNote() {
     return (
         <>
             <Loading isLoading={isLoading} />
-            <h1 className="text-2xl font-black p-8 text-black dark:text-white text-center">{language === "en" ? EnAddNote : IdAddNote}</h1>
+            <h1 className="p-8 text-center text-2xl font-black text-black dark:text-white">{language === "en" ? EnAddNote : IdAddNote}</h1>
             <NoteForm onTitleChange={onTitleChange} onDescriptionChange={onBodyChange} onSubmit={onSubmit} title={title} description={body} />
         </>
     )
