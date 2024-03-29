@@ -1,7 +1,8 @@
 import React from "react"
 import { TailSpin } from "react-loader-spinner"
+import PropTypes from "prop-types"
 
-const Loading = ({ isLoading }) => {
+function Loading({ isLoading }) {
     if (!isLoading) return null
 
     return (
@@ -9,6 +10,10 @@ const Loading = ({ isLoading }) => {
             <TailSpin color="#00BFFF" height={80} width={80} />
         </div>
     )
+}
+
+Loading.propTypes = {
+    isLoading: PropTypes.bool.isRequired,
 }
 
 export default Loading

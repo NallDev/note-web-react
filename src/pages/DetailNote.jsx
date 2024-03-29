@@ -12,7 +12,7 @@ function Detail() {
     const navigate = useNavigate()
     const { id } = useParams()
     const [note, setNote] = useState([])
-    const [isLoading, setIsLoading] = useState(false)
+    const [isLoading, setIsLoading] = useState(true)
     const { language } = useAppContext()
 
     const handleArchiveClick = async () => {
@@ -68,13 +68,16 @@ function Detail() {
         fetchData()
     }, [])
 
-    if (!note) {
+    if (isLoading) {
+        return <Loading isLoading={isLoading} />
+    }
+
+    if (note.length === 0) {
         return <Empty />
     }
 
     return (
         <>
-            <Loading isLoading={isLoading} />
             <div className="border border-gray-300 dark:border-gray-600 rounded-md p-4 flex flex-col h-full m-8 max-md: dark:bg-gray-800">
                 <div className="flex-grow">
                     <h3 className="text-lg font-bold mb-2 text-black dark:text-white break-words">{note.title}</h3>

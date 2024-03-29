@@ -1,5 +1,3 @@
-import { useAppContext } from "../context/AppContext"
-
 const showFormattedDate = (date, language) => {
     const options = {
         weekday: "long",

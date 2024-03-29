@@ -11,7 +11,7 @@ function ArchiveNotes() {
     const [searchParams, setSearchParams] = useSearchParams()
     const [query, setQuery] = useState(searchParams.get("query") || "")
     const [notes, setNotes] = useState([])
-    const [isLoading, setIsLoading] = useState(false)
+    const [isLoading, setIsLoading] = useState(true)
     const { language } = useAppContext()
 
     useEffect(() => {
@@ -32,7 +32,7 @@ function ArchiveNotes() {
         fetchData()
     }, [])
 
-    const handleQueryChange = (event) => {
+    function handleQueryChange(event) {
         const newQuery = event.target.value
         setQuery(newQuery)
         changeQueryParams(newQuery)
@@ -44,9 +44,12 @@ function ArchiveNotes() {
 
     const filteredNotes = notes.filter((note) => note.title.toLowerCase().includes(query.toLowerCase()))
 
+    if (isLoading) {
+        return <Loading isLoading={isLoading} />
+    }
+
     return (
         <>
-            <Loading isLoading={isLoading} />
             <div className="flex flex-col items-center justify-center p-8">
                 <InputText onQueryChange={handleQueryChange} query={query} placeholder={language === "en" ? EnSearch : IdSearch} />
                 <NoteList notes={filteredNotes} />

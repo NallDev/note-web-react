@@ -5,7 +5,7 @@ import { useAppContext } from "../context/AppContext"
 
 function Navigation() {
     const { updateToken, theme, toggleTheme, toggleLanguage } = useAppContext()
-    const onLogout = () => {
+    function onLogout() {
         updateToken("")
     }
 
